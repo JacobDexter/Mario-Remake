@@ -1,0 +1,2 @@
+﻿  Character.cpp
+E:\Semester 2\Mario\Mario\Character.cpp : fatal error C1041: cannot open program database 'E:\Semester 2\Mario\Mario\Debug\vc142.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
