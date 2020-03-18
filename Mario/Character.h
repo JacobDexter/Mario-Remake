@@ -15,10 +15,6 @@ class Texture2D;
 
 class Character
 {
-private:
-	//movement
-	FACING mFacingDirection;
-
 protected:
 	//drawing
 	SDL_Renderer* mRenderer;
@@ -29,6 +25,7 @@ protected:
 	bool mJumping;
 	bool mCanJump;
 	float mJumpForce;
+	FACING mFacingDirection;
 
 	float mCollisionRadius;
 
@@ -45,6 +42,8 @@ public:
 	//character movement
 	void AddGravity(float deltaTime);
 	void Jump();
+	bool isJumping() { return mJumping; };
+	void CancelJump() { mJumpForce = 0.0f; };
 	void SetPosition(Vector2D newPosition);
 
 	//character collisions
@@ -60,4 +59,4 @@ public:
 	LevelMap* mCurrentLevelMap;
 };
 
-#endif // _CHARACTER_H
+#endif

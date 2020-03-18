@@ -1,7 +1,5 @@
-﻿  PowBlock.cpp
-G:\Semester 2\Mario\Mario\PowBlock.h(20,110): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-G:\Semester 2\Mario\Mario\PowBlock.h(20,87): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-G:\Semester 2\Mario\Mario\PowBlock.cpp(16,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-G:\Semester 2\Mario\Mario\PowBlock.cpp(17,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-G:\Semester 2\Mario\Mario\PowBlock.cpp(8,49): warning C4390: ';': empty controlled statement found; is this the intent?
-  Mario.vcxproj -> G:\Semester 2\Mario\Debug\Mario.exe
+﻿  GameScreenManager.cpp
+  GameScreenMenu.cpp
+  Generating Code...
+E:\Semester 2\Mario\Mario\GameScreenMenu.cpp(33): warning C4715: 'GameScreenMenu::SetUpLevel': not all control paths return a value
+  Mario.vcxproj -> E:\Semester 2\Mario\Debug\Mario.exe

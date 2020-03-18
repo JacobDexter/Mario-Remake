@@ -17,7 +17,7 @@ public:
 
 	virtual void Render();
 
-	Rect2D GetCollisionBox() { return Rect2D(mPosition.x, mPosition.y, mTexture->GetWidth(), mTexture->GetHeight()); };
+	Rect2D GetCollisionBox() { return Rect2D(mPosition.x, mPosition.y, mSingleSpriteWidth, mSingleSpriteHeight); };
 	void TakeAHit();
 	bool IsAvailable() { return mNumberOfHitsLeft > 0; };
 private:
