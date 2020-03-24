@@ -18,3 +18,4 @@
 const float MovementSpeed = 100.0f;
 const float JUMP_FORCE_DECREMENT = 400.0f;
 const float INITIAL_JUMP_FORCE = 400.0f;
+const float KOOPA_SPEED = 40.0f;

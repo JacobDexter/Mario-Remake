@@ -8,6 +8,7 @@ CharacterKoopa::CharacterKoopa(SDL_Renderer* renderer, string imagePath, LevelMa
 	mPosition = startPosition;
 
 	mInjured = false;
+	mKoopaIsAlive = true;
 
 	mSingleSpriteWidth = mTexture->GetWidth() / 2;
 	mSingleSpriteHeight = mTexture->GetHeight();
@@ -35,7 +36,7 @@ void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 		mMovingRight = false;
 		mMovingLeft = false;
 
-		mInjured -= deltaTime;
+		mInjuredTime -= deltaTime;
 
 		if (mInjuredTime <= 0.0)
 			FlipRightWayUp();
@@ -64,6 +65,28 @@ void CharacterKoopa::Render()
 
 }
 
+void CharacterKoopa::Jump()
+{
+	if (mCanJump)
+	{
+		mJumpForce = 250.0f;
+		mJumping = true;
+		mCanJump = false;
+	}
+}
+
+void CharacterKoopa::MoveLeft(float deltaTime)
+{
+	mFacingDirection = FACING_LEFT;
+	mPosition.x -= mMovementSpeed * deltaTime;
+}
+
+void CharacterKoopa::MoveRight(float deltaTime)
+{
+	mFacingDirection = FACING_RIGHT;
+	mPosition.x += mMovementSpeed * deltaTime;
+}
+
 void CharacterKoopa::TakeDamage()
 {
 	mInjured = true;
@@ -71,19 +94,24 @@ void CharacterKoopa::TakeDamage()
 	Jump();
 }
 
-void CharacterKoopa::Jump()
-{
-	if (!mJumping)
-	{
-		mJumpForce = INITIAL_JUMP_FORCE;
-		mJumping = true;
-		mCanJump = false;
-	}
-}
-
 void CharacterKoopa::FlipRightWayUp()
 {
 	mFacingDirection != mFacingDirection;
 	mInjured = false;
 	Jump();
+}
+
+bool CharacterKoopa::GetAlive()
+{
+	return mKoopaIsAlive;
+}
+
+void CharacterKoopa::SetAlive(bool state)
+{
+	mKoopaIsAlive = state;
+}
+
+bool CharacterKoopa::KoopaState()
+{
+	return mInjured;
 }

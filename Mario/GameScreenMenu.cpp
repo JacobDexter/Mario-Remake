@@ -26,6 +26,9 @@ bool GameScreenMenu::SetUpLevel()
 	gCharacterMario = new CharacterMario(mRenderer, "Images/Mario.png", Vector2D(64, 330), mLevelMap);
 	gCharacterLuigi = new CharacterLuigi(mRenderer, "Images/Luigi.png", Vector2D(64, 330), mLevelMap);
 
+	CreateKoopa(Vector2D(150, 32), FACING_RIGHT, KOOPA_SPEED);
+	CreateKoopa(Vector2D(325, 32), FACING_LEFT, KOOPA_SPEED);
+
 	mPowBlock = new PowBlock(mRenderer, mLevelMap);
 
 	mScreenShake = false;
@@ -58,7 +61,9 @@ void GameScreenMenu::SetLevelMap()
 
 void GameScreenMenu::CreateKoopa(Vector2D position, FACING direction, float speed)
 {
-
+	CharacterKoopa* koopaCharacter;
+	koopaCharacter = new CharacterKoopa(mRenderer, "Images/Koopa.png", mLevelMap, Vector2D(position), direction, speed);
+	mEnemies.push_back(koopaCharacter);
 }
 
 void GameScreenMenu::UpdatePOWBlock()
@@ -67,13 +72,13 @@ void GameScreenMenu::UpdatePOWBlock()
 	{
 		if (mPowBlock->IsAvailable())
 		{
-			if (gCharacterMario->isJumping())
+			if (gCharacterMario->isJumping() && gCharacterMario->GetState() == 1)
 			{
 				ScreenShake();
 				mPowBlock->TakeAHit();
 				gCharacterMario->CancelJump();
 			}
-			else if (gCharacterLuigi->isJumping())
+			else if (gCharacterLuigi->isJumping() && gCharacterLuigi->GetState() == 1)
 			{
 				ScreenShake();
 				mPowBlock->TakeAHit();
@@ -88,6 +93,7 @@ void GameScreenMenu::UpdateEnemies(float deltaTime, SDL_Event e)
 	if (!mEnemies.empty())
 	{
 		int enemyIndexToDelete = -1;
+
 		for (unsigned int i = 0; i < mEnemies.size(); i++)
 		{
 			if (mEnemies[i]->GetPosition().y > 300.0f) //Check to see if enemy is on bottom tile row
@@ -100,6 +106,38 @@ void GameScreenMenu::UpdateEnemies(float deltaTime, SDL_Event e)
 			}
 
 			mEnemies[i]->Update(deltaTime, e); //update enemy
+
+			//collision checks with player and enemy
+			if ((mEnemies[i]->GetPosition().y > 300.0f || mEnemies[i]->GetPosition().y <= 64.0f) && (mEnemies[i]->GetPosition().x < 64.0f || mEnemies[i]->GetPosition().x > SCREEN_WIDTH - 96.0f))
+			{
+
+			}
+			else
+			{
+				if (!mEnemies[i]->KoopaState())
+				{
+					if (Collisions::Instance()->Circle(mEnemies[i], gCharacterMario))
+					{
+						gCharacterMario->SetState(CHARACTERSTATE_DEAD);
+					}
+					if (Collisions::Instance()->Circle(mEnemies[i], gCharacterLuigi))
+					{
+						gCharacterLuigi->SetState(CHARACTERSTATE_DEAD);
+					}
+				}
+			}
+
+			//schedule dead enemy for deletion
+			if (!mEnemies[i]->GetAlive())
+			{
+				enemyIndexToDelete = i;
+			}
+		}
+
+		//Remove a dead enemy
+		if (enemyIndexToDelete != -1)
+		{
+			mEnemies.erase(mEnemies.begin() + enemyIndexToDelete);
 		}
 	}
 }
@@ -120,8 +158,18 @@ void GameScreenMenu::Update(float deltaTime, SDL_Event e)
 		}
 	}
 
-	gCharacterMario->Update(deltaTime, e);
-	gCharacterLuigi->Update(deltaTime, e);
+	mBackgroundTexture->Render(Vector2D(0, mBackgroundYPos), SDL_FLIP_NONE);
+
+	if (gCharacterMario->GetState() == 1)
+	{
+		gCharacterMario->Update(deltaTime, e);
+	}
+	
+	if (gCharacterLuigi->GetState() == 1)
+	{
+		gCharacterLuigi->Update(deltaTime, e);
+	}
+
 	UpdatePOWBlock();
 	UpdateEnemies(deltaTime, e);
 }
@@ -135,8 +183,16 @@ void GameScreenMenu::Render()
 	}
 
 	mBackgroundTexture->Render(Vector2D(0, mBackgroundYPos), SDL_FLIP_NONE);
-	gCharacterMario->Render();
-	gCharacterLuigi->Render();
+	if (gCharacterMario->GetState() == 1)
+	{
+		gCharacterMario->Render();
+	}
+
+	if(gCharacterLuigi->GetState() == 1)
+	{
+		gCharacterLuigi->Render();
+	}
+
 	mPowBlock->Render();
 }
 
@@ -145,6 +201,11 @@ void GameScreenMenu::ScreenShake()
 	mScreenShake = true;
 	mScreenShakeTime = SCREENSHAKE_DURATION;
 	mWobble = 0.0f;
+
+	for (unsigned int i = 0; i < mEnemies.size(); i++)
+	{
+		mEnemies[i]->TakeDamage();
+	}
 }
 
 GameScreenMenu::~GameScreenMenu()

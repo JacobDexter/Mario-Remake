@@ -15,7 +15,9 @@ Character::Character(SDL_Renderer* renderer, string imagePath, Vector2D startPos
 	mFacingDirection = FACING_RIGHT;
 	mMovingLeft = false;
 	mMovingRight = false;
-	mCanJump = true;
+
+	//character state
+	characterState = CHARACTERSTATE_ALIVE;
 
 	//Character Collisions
 	mCollisionRadius = 15.0f;
@@ -38,7 +40,42 @@ void Character::Render()
 
 void Character::Update(float deltaTime, SDL_Event e)
 {
+	int centralXPosition = (int)(mPosition.x + (mTexture->GetWidth() * 0.5f)) / TILE_WIDTH;
+	int footPosition = (int)(mPosition.y + mTexture->GetHeight()) / TILE_HEIGHT;
 
+	cout << mJumpForce << " " << mJumping << endl;
+
+	if (mCurrentLevelMap->GetTileAt(footPosition, centralXPosition) == 0)
+	{
+		AddGravity(deltaTime);
+	}
+	else
+	{
+		mCanJump = true;
+	}
+
+	if (mJumping)
+	{
+		//adjust position
+		mPosition.y -= mJumpForce * deltaTime;
+
+		//reduce jump force
+		mJumpForce -= JUMP_FORCE_DECREMENT * deltaTime;
+
+		if (mJumpForce <= 0.0f)
+		{
+			mJumping = false;
+		}
+	}
+
+	if (mMovingLeft)
+	{
+		MoveLeft(deltaTime);
+	}
+	else if (mMovingRight)
+	{
+		MoveRight(deltaTime);
+	}
 }
 
 void Character::MoveLeft(float deltaTime)
@@ -71,7 +108,7 @@ void Character::AddGravity(float deltaTime)
 
 void Character::Jump()
 {
-	if (!mJumping)
+	if (mCanJump)
 	{
 		mJumpForce = INITIAL_JUMP_FORCE;
 		mJumping = true;
@@ -87,6 +124,16 @@ float Character::GetCollisionRadius()
 Rect2D Character::GetCollisionBox()
 {
 	return Rect2D(mPosition.x, mPosition.y, mTexture->GetWidth(), mTexture->GetHeight());
+}
+
+void Character::SetState(CHARACTER_STATE state)
+{
+	characterState = state;
+}
+
+int Character::GetState()
+{
+	return (int)characterState;
 }
 
 Character::~Character()

@@ -27,6 +27,9 @@ protected:
 	float mJumpForce;
 	FACING mFacingDirection;
 
+	//character state
+	CHARACTER_STATE characterState;
+
 	float mCollisionRadius;
 
 	virtual void MoveLeft(float deltaTime);
@@ -45,6 +48,10 @@ public:
 	bool isJumping() { return mJumping; };
 	void CancelJump() { mJumpForce = 0.0f; };
 	void SetPosition(Vector2D newPosition);
+
+	//character state
+	void SetState(CHARACTER_STATE state);
+	int GetState();
 
 	//character collisions
 	Vector2D GetPosition();

@@ -18,6 +18,11 @@ public:
 	//behaviour
 	void TakeDamage();
 	void Jump();
+	void SetAlive(bool state);
+	bool GetAlive();
+	bool KoopaState();
+	void MoveLeft(float deltaTime);
+	void MoveRight(float deltaTime);
 
 private:
 	//sprite
@@ -28,8 +33,10 @@ private:
 	bool mInjured;
 	float mInjuredTime;
 	float mMovementSpeed;
+	bool mKoopaIsAlive;
 
 	void FlipRightWayUp();
 };
+
 
 #endif
