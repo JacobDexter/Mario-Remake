@@ -5,7 +5,7 @@ using namespace std;
 
 CharacterMario::CharacterMario(SDL_Renderer* renderer, string imagePath, Vector2D startPosition, LevelMap* map) : Character(renderer, imagePath, startPosition, map)
 {
-
+	
 }
 
 void CharacterMario::Update(float deltaTime, SDL_Event e)

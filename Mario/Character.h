@@ -57,6 +57,7 @@ public:
 	Vector2D GetPosition();
 	float GetCollisionRadius();
 	Rect2D GetCollisionBox();
+	bool CheckViewportCollision();
 
 	//movement variables
 	bool mMovingLeft;

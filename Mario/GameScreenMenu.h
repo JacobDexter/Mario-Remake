@@ -8,6 +8,7 @@
 #include "CharacterLuigi.h"
 #include "CharacterKoopa.h"
 #include "LevelMap.h"
+#include "SoundEffect.h"
 #include <vector>
 
 class Texture2D;
@@ -49,6 +50,10 @@ private:
 	float mBackgroundYPos;
 	void ScreenShake();
 
+	//sound effects
+	SoundEffect* mGunShot;
+
 	//Enemies
 	vector<CharacterKoopa*> mEnemies;
+	float koopaRespawnTimer = KOOPA_RESPAWN_TIME;
 };

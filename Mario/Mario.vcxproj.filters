@@ -72,6 +72,9 @@
     <ClCompile Include="CharacterKoopa.cpp">
       <Filter>Source Files\Character Controller</Filter>
     </ClCompile>
+    <ClCompile Include="SoundEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mario.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="CharacterKoopa.h">
       <Filter>Header Files\Character Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundEffect.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

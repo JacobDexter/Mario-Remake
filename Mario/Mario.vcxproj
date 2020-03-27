@@ -145,6 +145,7 @@
     <ClCompile Include="GameScreenMenu.cpp" />
     <ClCompile Include="LevelMap.cpp" />
     <ClCompile Include="PowBlock.cpp" />
+    <ClCompile Include="SoundEffect.cpp" />
     <ClCompile Include="Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +163,7 @@
     <ClInclude Include="LevelMap.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="PowBlock.h" />
+    <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="Texture2D.h" />
   </ItemGroup>
   <ItemGroup>

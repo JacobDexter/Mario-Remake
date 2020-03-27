@@ -1,15 +1,13 @@
-﻿  CharacterKoopa.cpp
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(13,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(14,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(48,11): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(51,10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(53,45): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(53,45): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(53,65): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(53,65): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(55,64): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(55,64): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(55,84): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(55,84): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-G:\Semester 2\Mario\Mario\CharacterKoopa.cpp(99,19): warning C4552: '!=': result of expression not used
+﻿  Character.cpp
+G:\Semester 2\Mario\Mario\Character.cpp(95,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+G:\Semester 2\Mario\Mario\Character.cpp(100,30): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+G:\Semester 2\Mario\Mario\Character.cpp(138,83): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+G:\Semester 2\Mario\Mario\Character.cpp(138,60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  CharacterLuigi.cpp
+  CharacterMario.cpp
+  GameScreenManager.cpp
+  GameScreenMenu.cpp
+  Generating Code...
+G:\Semester 2\Mario\Mario\GameScreenMenu.cpp(38): warning C4715: 'GameScreenMenu::SetUpLevel': not all control paths return a value
+G:\Semester 2\Mario\Mario\Character.cpp(103): warning C4715: 'Character::CheckViewportCollision': not all control paths return a value
   Mario.vcxproj -> G:\Semester 2\Mario\Debug\Mario.exe

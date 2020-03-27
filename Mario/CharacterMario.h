@@ -5,6 +5,7 @@
 
 #include "Character.h"
 #include "Texture2D.h"
+#include "SoundEffect.h"
 
 using namespace std;
 

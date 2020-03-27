@@ -43,8 +43,6 @@ void Character::Update(float deltaTime, SDL_Event e)
 	int centralXPosition = (int)(mPosition.x + (mTexture->GetWidth() * 0.5f)) / TILE_WIDTH;
 	int footPosition = (int)(mPosition.y + mTexture->GetHeight()) / TILE_HEIGHT;
 
-	cout << mJumpForce << " " << mJumping << endl;
-
 	if (mCurrentLevelMap->GetTileAt(footPosition, centralXPosition) == 0)
 	{
 		AddGravity(deltaTime);
@@ -88,6 +86,20 @@ void Character::MoveRight(float deltaTime)
 {
 	mFacingDirection = FACING_RIGHT;
 	mPosition.x += MovementSpeed * deltaTime;
+}
+
+bool Character::CheckViewportCollision()
+{
+	// Right Border
+	if (mPosition.x + mTexture->GetWidth() > SCREEN_WIDTH) {
+		mPosition.x = 32 - mTexture->GetWidth();
+		return true;
+	}
+	// Left Border
+	else if (mPosition.x + mTexture->GetWidth() < 32) {
+		mPosition.x = SCREEN_WIDTH - mTexture->GetWidth();
+		return true;
+	}
 }
 
 void Character::SetPosition(Vector2D newPosition)
