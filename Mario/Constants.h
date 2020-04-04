@@ -6,7 +6,7 @@
 
 //TILE MAP
 #define MAP_HEIGHT 13
-#define MAP_WIDTH 16
+#define MAP_WIDTH 17
 #define TILE_HEIGHT 32
 #define TILE_WIDTH 32
 

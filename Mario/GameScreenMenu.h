@@ -3,17 +3,14 @@
 #include "SDL.h"
 #include "Commons.h"
 #include "GameScreen.h"
-#include "Character.h"
-#include "CharacterMario.h"
-#include "CharacterLuigi.h"
-#include "CharacterKoopa.h"
-#include "LevelMap.h"
-#include "SoundEffect.h"
-#include <vector>
+#include "Text.h"
+#include "Texture2D.h"
+#include "GameScreenManager.h"
+#include "Mario.h"
 
 class Texture2D;
-class PowBlock;
-class Character;
+class GameScreen;
+class GameScreenManager;
 
 class GameScreenMenu : GameScreen
 {
@@ -23,37 +20,15 @@ public:
 
 	void Render();
 	void Update(float deltaTime, SDL_Event e);
-
-	//Blocks
-	void UpdatePOWBlock();
-
-	//Enemies
-	void UpdateEnemies(float deltaTime, SDL_Event e);
-	void CreateKoopa(Vector2D position, FACING direction, float speed);
+	bool SetUpLevel();
 
 private:
 	//variables
 	Texture2D* mBackgroundTexture;
-	Character* gCharacterMario;
-	Character* gCharacterLuigi;
-	LevelMap* mLevelMap;
-	PowBlock* mPowBlock;
 
-	//functions
-	bool SetUpLevel();
-	void SetLevelMap();
-
-	//Screen Shake
-	bool mScreenShake;
-	float mScreenShakeTime;
-	float mWobble;
-	float mBackgroundYPos;
-	void ScreenShake();
-
-	//sound effects
-	SoundEffect* mGunShot;
-
-	//Enemies
-	vector<CharacterKoopa*> mEnemies;
-	float koopaRespawnTimer = KOOPA_RESPAWN_TIME;
+	//Text
+	Text* menuText;
+	TTF_Font* menuFont;
+	SDL_Texture* menuTexture;
+	SDL_Rect menuRect;
 };

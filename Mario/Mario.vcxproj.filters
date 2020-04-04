@@ -31,19 +31,16 @@
     <Filter Include="Header Files\Game Screen Manager">
       <UniqueIdentifier>{2a750658-b9c7-4f27-ad79-51a2c1461a71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Base Classes">
+      <UniqueIdentifier>{146c19a2-dd3b-4207-8db5-04f0f30c5815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base Classes">
+      <UniqueIdentifier>{66591760-f794-47fc-8187-343f673a23c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScreenLevel1.cpp">
-      <Filter>Source Files\Levels</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScreenMenu.cpp">
-      <Filter>Source Files\Levels</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>Source Files\Character Controller</Filter>
@@ -60,9 +57,6 @@
     <ClCompile Include="GameScreen.cpp">
       <Filter>Source Files\Game Screen Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Collisions.cpp">
-      <Filter>Source Files\Character Controller</Filter>
-    </ClCompile>
     <ClCompile Include="LevelMap.cpp">
       <Filter>Source Files\Game Screen Manager</Filter>
     </ClCompile>
@@ -72,8 +66,41 @@
     <ClCompile Include="CharacterKoopa.cpp">
       <Filter>Source Files\Character Controller</Filter>
     </ClCompile>
+    <ClCompile Include="CharacterPlayer.cpp">
+      <Filter>Source Files\Character Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterEnemy.cpp">
+      <Filter>Source Files\Character Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterCoin.cpp">
+      <Filter>Source Files\Character Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Source Files\Base Classes</Filter>
+    </ClCompile>
     <ClCompile Include="SoundEffect.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScreenLevel1.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScreenMenu.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Collisions.cpp">
+      <Filter>Source Files\Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScreenLeaderboard.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScreenGameOver.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Music.cpp">
+      <Filter>Source Files\Base Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,22 +110,10 @@
     <ClInclude Include="Commons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Texture2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScreenMenu.h">
-      <Filter>Header Files\Levels</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScreenLevel1.h">
-      <Filter>Header Files\Levels</Filter>
-    </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Header Files\Character Controller</Filter>
     </ClInclude>
     <ClInclude Include="CharacterMario.h">
-      <Filter>Header Files\Character Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterLuigi.h">
       <Filter>Header Files\Character Controller</Filter>
     </ClInclude>
     <ClInclude Include="GameScreenManager.h">
@@ -106,9 +121,6 @@
     </ClInclude>
     <ClInclude Include="GameScreen.h">
       <Filter>Header Files\Game Screen Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Collisions.h">
-      <Filter>Header Files\Character Controller</Filter>
     </ClInclude>
     <ClInclude Include="LevelMap.h">
       <Filter>Header Files\Game Screen Manager</Filter>
@@ -122,8 +134,44 @@
     <ClInclude Include="CharacterKoopa.h">
       <Filter>Header Files\Character Controller</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterEnemy.h">
+      <Filter>Header Files\Character Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterPlayer.h">
+      <Filter>Header Files\Character Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterCoin.h">
+      <Filter>Header Files\Character Controller</Filter>
+    </ClInclude>
     <ClInclude Include="SoundEffect.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>Header Files\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Collisions.h">
+      <Filter>Header Files\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScreenLevel1.h">
+      <Filter>Header Files\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScreenMenu.h">
+      <Filter>Header Files\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterLuigi.h">
+      <Filter>Header Files\Character Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScreenLeaderboard.h">
+      <Filter>Header Files\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScreenGameOver.h">
+      <Filter>Header Files\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Music.h">
+      <Filter>Header Files\Base Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -139,5 +187,6 @@
     <Library Include="SDL\SDL2main.lib">
       <Filter>Source Files</Filter>
     </Library>
+    <Library Include="SDL\SDL2_ttf.lib" />
   </ItemGroup>
 </Project>

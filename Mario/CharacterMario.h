@@ -3,13 +3,13 @@
 #ifndef _CHARACTERMARIO_H
 #define _CHARACTERMARIO_H
 
-#include "Character.h"
+#include "CharacterPlayer.h"
 #include "Texture2D.h"
 #include "SoundEffect.h"
 
 using namespace std;
 
-class CharacterMario : public Character
+class CharacterMario : public CharacterPlayer
 {
 public:
 	CharacterMario(SDL_Renderer* renderer, string imagePath, Vector2D startPosition, LevelMap* map);

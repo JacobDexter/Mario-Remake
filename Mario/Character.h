@@ -44,10 +44,10 @@ public:
 	
 	//character movement
 	void AddGravity(float deltaTime);
-	void Jump();
 	bool isJumping() { return mJumping; };
 	void CancelJump() { mJumpForce = 0.0f; };
 	void SetPosition(Vector2D newPosition);
+	void PlayerDeath(float deltaTime);
 
 	//character state
 	void SetState(CHARACTER_STATE state);

@@ -8,6 +8,7 @@
 #include "Mario.h"
 #include "LevelMap.h"
 #include "Texture2D.h"
+#include "SoundEffect.h"
 
 class PowBlock
 {
@@ -30,6 +31,9 @@ private:
 	float mSingleSpriteHeight;
 
 	int mNumberOfHitsLeft;
+
+	//sound effects
+	SoundEffect* sPow;
 };
 
 #endif // _POWBLOCK_H

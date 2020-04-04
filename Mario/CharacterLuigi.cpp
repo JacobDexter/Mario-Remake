@@ -3,7 +3,7 @@
 
 using namespace std;
 
-CharacterLuigi::CharacterLuigi(SDL_Renderer* renderer, string imagePath, Vector2D startPosition, LevelMap* map) : Character(renderer, imagePath, startPosition, map)
+CharacterLuigi::CharacterLuigi(SDL_Renderer* renderer, string imagePath, Vector2D startPosition, LevelMap* map) : CharacterPlayer(renderer, imagePath, startPosition, map)
 {
 
 }
@@ -35,7 +35,7 @@ void CharacterLuigi::Update(float deltaTime, SDL_Event e)
 			mMovingRight = false;
 			return;
 		case SDLK_w:
-			Character::Jump();
+			CharacterPlayer::Jump();
 			return;
 			break;
 		}

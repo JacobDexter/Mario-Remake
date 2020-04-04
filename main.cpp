@@ -1,6 +1,7 @@
-#include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_mixer.h"
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h>
+#include <SDL_ttf.h>
 #include <iostream>
 #include "Mario/mario.h"
 #include "Mario/Texture2D.h"
@@ -12,7 +13,6 @@ using namespace std;
 
 SDL_Window* gameWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
-Mix_Music* gMusic = NULL;
 GameScreenManager* gameScreenManager;
 
 Uint32 gOldTime;
@@ -25,13 +25,6 @@ int main(int argc, char* args[])
 		gameScreenManager = new GameScreenManager(gRenderer, SCREEN_MENU);
 		gOldTime = SDL_GetTicks();
 		bool quit = false;
-
-		LoadMusic("Music/Mario.ogg");
-
-		if (Mix_PlayingMusic() == 0)
-		{
-			Mix_PlayMusic(gMusic, -1);
-		}
 
 		while (!quit)
 		{
@@ -60,8 +53,11 @@ bool InitSDL()
 		gRenderer = SDL_CreateRenderer(gameWindow, -1, SDL_RENDERER_ACCELERATED);
 	}
 
+	TTF_Init();
+
 	if (gameWindow != NULL && gRenderer != NULL)
 	{
+		//opens mixer audio channelsfor use
 		if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 		{
 			cout << "Mixer could not initialise. Error: " << Mix_GetError();
@@ -84,33 +80,26 @@ void CloseSDL()
 	delete gameScreenManager;
 	gameScreenManager = NULL;
 
-	//Release music
-	Mix_FreeMusic(gMusic);
-	gMusic = NULL;
-
 	IMG_Quit();
+	TTF_Quit();
 	SDL_Quit();
 }
 
 bool Update()
 {
+	//poll users keyboard and mouse events
 	Uint32 newTime = SDL_GetTicks();
 	SDL_Event e; //event handler
 	SDL_PollEvent(&e); // find occured events
 	
+	gameScreenManager->Update((float)(newTime - gOldTime) / 1000.0f, e);
+
 	switch (e.type)
 	{
-		case SDL_QUIT:
-			return true;
-		case SDL_KEYUP:
-			switch(e.key.keysym.sym)
-				case SDLK_q:
-					return true;
-				break;
-		break;
+	case SDL_QUIT:
+		return true;
+	break;
 	}
-	
-	gameScreenManager->Update((float)(newTime - gOldTime) / 1000.0f, e);
 
 	gOldTime = newTime;
 
@@ -127,14 +116,4 @@ void Render()
 
 	//update screen
 	SDL_RenderPresent(gRenderer);
-}
-
-void LoadMusic(string path)
-{
-	gMusic = Mix_LoadMUS(path.c_str());
-
-	if (gMusic == NULL)
-	{
-		cout << "Failed to load background music! Error: " << Mix_GetError() << endl;
-	}
 }

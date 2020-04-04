@@ -7,4 +7,3 @@ bool InitSDL();
 void CloseSDL();
 bool Update();
 void Render();
-void LoadMusic(string path);

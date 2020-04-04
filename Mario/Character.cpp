@@ -91,12 +91,12 @@ void Character::MoveRight(float deltaTime)
 bool Character::CheckViewportCollision()
 {
 	// Right Border
-	if (mPosition.x + mTexture->GetWidth() > SCREEN_WIDTH) {
+	if (mPosition.x + mTexture->GetWidth() > SCREEN_WIDTH + mTexture->GetWidth()) {
 		mPosition.x = 32 - mTexture->GetWidth();
 		return true;
 	}
 	// Left Border
-	else if (mPosition.x + mTexture->GetWidth() < 32) {
+	else if (mPosition.x + mTexture->GetWidth() < 0) {
 		mPosition.x = SCREEN_WIDTH - mTexture->GetWidth();
 		return true;
 	}
@@ -118,16 +118,6 @@ void Character::AddGravity(float deltaTime)
 	mCanJump = false;
 }
 
-void Character::Jump()
-{
-	if (mCanJump)
-	{
-		mJumpForce = INITIAL_JUMP_FORCE;
-		mJumping = true;
-		mCanJump = false;
-	}
-}
-
 float Character::GetCollisionRadius()
 {
 	return mCollisionRadius;
@@ -146,6 +136,11 @@ void Character::SetState(CHARACTER_STATE state)
 int Character::GetState()
 {
 	return (int)characterState;
+}
+
+void Character::PlayerDeath(float deltaTime)
+{
+	mPosition.y += (GRAVITY * 4) * deltaTime;
 }
 
 Character::~Character()

@@ -80,7 +80,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(PROJECTDIR)SDL\mixer_include;$(PROJECTDIR)SDL\include;$(PROJECTDIR)SDL\image_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PROJECTDIR)SDL\ttf_include;$(PROJECTDIR)SDL\mixer_include;$(PROJECTDIR)SDL\include;$(PROJECTDIR)SDL\image_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,35 +135,49 @@
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CharacterCoin.cpp" />
+    <ClCompile Include="CharacterEnemy.cpp" />
     <ClCompile Include="CharacterKoopa.cpp" />
     <ClCompile Include="CharacterLuigi.cpp" />
     <ClCompile Include="CharacterMario.cpp" />
+    <ClCompile Include="CharacterPlayer.cpp" />
     <ClCompile Include="Collisions.cpp" />
     <ClCompile Include="GameScreen.cpp" />
-    <ClCompile Include="GameScreenLevel1.cpp" />
+    <ClCompile Include="GameScreenGameOver.cpp" />
+    <ClCompile Include="GameScreenLeaderboard.cpp" />
     <ClCompile Include="GameScreenManager.cpp" />
+    <ClCompile Include="GameScreenLevel1.cpp" />
     <ClCompile Include="GameScreenMenu.cpp" />
     <ClCompile Include="LevelMap.cpp" />
+    <ClCompile Include="Music.cpp" />
     <ClCompile Include="PowBlock.cpp" />
     <ClCompile Include="SoundEffect.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterCoin.h" />
+    <ClInclude Include="CharacterEnemy.h" />
     <ClInclude Include="CharacterKoopa.h" />
     <ClInclude Include="CharacterLuigi.h" />
     <ClInclude Include="CharacterMario.h" />
+    <ClInclude Include="CharacterPlayer.h" />
     <ClInclude Include="Collisions.h" />
     <ClInclude Include="Commons.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="GameScreen.h" />
-    <ClInclude Include="GameScreenLevel1.h" />
+    <ClInclude Include="GameScreenGameOver.h" />
+    <ClInclude Include="GameScreenLeaderboard.h" />
     <ClInclude Include="GameScreenManager.h" />
+    <ClInclude Include="GameScreenLevel1.h" />
     <ClInclude Include="GameScreenMenu.h" />
     <ClInclude Include="LevelMap.h" />
     <ClInclude Include="Mario.h" />
+    <ClInclude Include="Music.h" />
     <ClInclude Include="PowBlock.h" />
     <ClInclude Include="SoundEffect.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Texture2D.h" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +185,7 @@
     <Library Include="SDL\SDL2main.lib" />
     <Library Include="SDL\SDL2_image.lib" />
     <Library Include="SDL\SDL2_mixer.lib" />
+    <Library Include="SDL\SDL2_ttf.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

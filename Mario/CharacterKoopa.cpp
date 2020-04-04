@@ -1,7 +1,6 @@
 #include "CharacterKoopa.h"
-#include "Character.h"
 
-CharacterKoopa::CharacterKoopa(SDL_Renderer* renderer, string imagePath, LevelMap* map, Vector2D startPosition, FACING startFacing, float movementSpeed) : Character(renderer, imagePath, startPosition, map)
+CharacterKoopa::CharacterKoopa(SDL_Renderer* renderer, string imagePath, LevelMap* map, Vector2D startPosition, FACING startFacing, float movementSpeed) : CharacterEnemy(renderer, imagePath, startPosition, map)
 {
 	mFacingDirection = startFacing;
 	mMovementSpeed = movementSpeed;
@@ -63,16 +62,6 @@ void CharacterKoopa::Render()
 		mTexture->Render(portionOfSpritesheet, destRect, SDL_FLIP_HORIZONTAL);
 	}
 
-}
-
-void CharacterKoopa::Jump()
-{
-	if (mCanJump)
-	{
-		mJumpForce = 250.0f;
-		mJumping = true;
-		mCanJump = false;
-	}
 }
 
 void CharacterKoopa::MoveLeft(float deltaTime)

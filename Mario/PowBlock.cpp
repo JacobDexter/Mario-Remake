@@ -15,6 +15,8 @@ PowBlock::PowBlock(SDL_Renderer* renderer, LevelMap* map)
 	mSingleSpriteHeight = mTexture->GetHeight();
 	mNumberOfHitsLeft = 3;
 	mPosition = Vector2D((SCREEN_WIDTH * 0.5f) - mSingleSpriteWidth * 0.5f, 260);
+
+	sPow = new SoundEffect(1, "Sounds/Pow.wav", 0);
 }
 
 void PowBlock::Render()
@@ -33,6 +35,7 @@ void PowBlock::Render()
 void PowBlock::TakeAHit()
 {
 	mNumberOfHitsLeft -= 1;
+	sPow->Play();
 
 	if (mNumberOfHitsLeft <= 0)
 	{
