@@ -23,6 +23,8 @@ public:
 	void MoveLeft(float deltaTime);
 	void MoveRight(float deltaTime);
 
+	bool ShellHit;
+
 private:
 	//sprite
 	float mSingleSpriteWidth;

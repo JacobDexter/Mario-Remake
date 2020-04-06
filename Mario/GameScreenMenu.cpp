@@ -22,7 +22,7 @@ bool GameScreenMenu::SetUpLevel()
 
 	//Load Text
 	menuText = new Text();
-	menuFont = TTF_OpenFont("Fonts/SuperMario.ttf", 24);
+	menuFont = TTF_OpenFont("Fonts/emulogic.ttf", 18);
 
 	if (menuFont == NULL)
 	{
@@ -30,7 +30,7 @@ bool GameScreenMenu::SetUpLevel()
 		return false;
 	}
 
-	menuText->Setup(mRenderer, 256, 270, "Click to start the game!", menuFont, { 255, 255, 255, 0 }, &menuTexture, &menuRect);
+	menuText->Setup(mRenderer, 256, 270, "Click to start the game!", menuFont, { 255, 255, 255, 0 }, &menuTexture, &menuRect, menuSurface);
 	menuRect.x -= menuRect.w * 0.5f;
 
 	return true;

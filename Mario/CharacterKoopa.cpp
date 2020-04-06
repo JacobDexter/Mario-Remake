@@ -8,6 +8,7 @@ CharacterKoopa::CharacterKoopa(SDL_Renderer* renderer, string imagePath, LevelMa
 
 	mInjured = false;
 	mKoopaIsAlive = true;
+	ShellHit = false;
 
 	mSingleSpriteWidth = mTexture->GetWidth() / 2;
 	mSingleSpriteHeight = mTexture->GetHeight();
@@ -39,6 +40,13 @@ void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 
 		if (mInjuredTime <= 0.0)
 			FlipRightWayUp();
+	}
+
+	if (ShellHit)
+	{
+		mPosition.y += deltaTime * 400;
+		mPosition.x += deltaTime * 350;
+		mInjuredTime = 5.0f;
 	}
 }
 

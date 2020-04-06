@@ -31,4 +31,5 @@ private:
 	TTF_Font* menuFont;
 	SDL_Texture* menuTexture;
 	SDL_Rect menuRect;
+	SDL_Surface* menuSurface;
 };

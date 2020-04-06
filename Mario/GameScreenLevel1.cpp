@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <sstream>
 #include "Texture2D.h"
 #include "PowBlock.h"
 #include "Collisions.h"
@@ -14,6 +15,7 @@ GameScreenLevel1::GameScreenLevel1(SDL_Renderer* renderer) : GameScreen(renderer
 {
 	mLevelMap = NULL;
 	gameOver = false;
+	score = 0;
 	SetUpLevel();
 }
 
@@ -29,7 +31,7 @@ bool GameScreenLevel1::SetUpLevel()
 	SetLevelMap();
 
 	//Open Font
-	marioFont = TTF_OpenFont("Fonts/SuperMario.ttf", 24);
+	marioFont = TTF_OpenFont("Fonts/emulogic.ttf", 20);
 
 	if (marioFont == NULL)
 	{
@@ -38,11 +40,11 @@ bool GameScreenLevel1::SetUpLevel()
 
 	//Scoreboard Text
 	scoreboard = new Text();
-	scoreboard->Setup(mRenderer, 70, 0, "SCORE:", marioFont, { 255, 0, 0, 0 }, &scoreTexture, &scoreRect);
+	scoreboard->Setup(mRenderer, 70, 0, "SCORE:", marioFont, { 255, 0, 0, 0 }, &scoreTexture, &scoreRect, scoreSurface);
 
 	//Score Number Text
 	scoreNum = new Text();
-	scoreNum->Setup(mRenderer, (scoreRect.x + scoreRect.w + 3), 0, "0", marioFont, { 255, 255, 255, 0 }, &scoreNumTexture, &scoreNumRect);
+	scoreNum->Setup(mRenderer, (scoreRect.x + scoreRect.w + 3), 0, "0", marioFont, { 255, 255, 255, 0 }, &scoreNumTexture, &scoreNumRect, scoreNumSurface);
 
 	//Players setup
 	gCharacterMario = new CharacterMario(mRenderer, "Images/Mario.png", Vector2D(64, 330), mLevelMap);
@@ -58,7 +60,8 @@ bool GameScreenLevel1::SetUpLevel()
 	//Sounds setup
 	sKoopaSpawn = new SoundEffect(1, "Sounds/KoopaSpawn.wav", 0);
 	sGameOver = new SoundEffect(1, "Sounds/GameOver.wav", 0);
-	sPlayerDeath = new SoundEffect(1, "Sounds/Death.wav", 0);
+	sPlayerDeath = new SoundEffect(2, "Sounds/Death.wav", 0);
+	sKoopaKick = new SoundEffect(2, "Sounds/KoopaKick.wav", 0);
 
 	mScreenShake = false;
 	mBackgroundYPos = 0.0f;
@@ -241,13 +244,27 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 				{
 					if (Collisions::Instance()->Circle(mKoopas[i], gCharacterMario))
 					{
-						//slide of screen
-						mKoopas[i]->SetAlive(false);
+						//hit of screen
+						if (!mKoopas[i]->ShellHit)
+						{
+							sKoopaKick->Play();
+							score += 800;
+							UpdateScoreText(score);
+						}
+
+						mKoopas[i]->ShellHit = true;
 					}
 					if (Collisions::Instance()->Circle(mKoopas[i], gCharacterLuigi))
 					{
-						//slide of screen
-						mKoopas[i]->SetAlive(false);
+						//hit of screen
+						if (!mKoopas[i]->ShellHit)
+						{
+							sKoopaKick->Play();
+							score += 800;
+							UpdateScoreText(score);
+						}
+
+						mKoopas[i]->ShellHit = true;
 					}
 				}
 
@@ -315,10 +332,14 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 				if (Collisions::Instance()->Circle(mCoins[i], gCharacterMario))
 				{
 					mCoins[i]->CollectCoin();
+					UpdateScoreText(score);
+					score += 800;
 				}
 				if (Collisions::Instance()->Circle(mCoins[i], gCharacterLuigi))
 				{
 					mCoins[i]->CollectCoin();
+					score += 800;
+					UpdateScoreText(score);
 				}
 			}
 
@@ -379,11 +400,26 @@ void GameScreenLevel1::ScreenShake()
 	for (unsigned int i = 0; i < mKoopas.size(); i++)
 	{
 		mKoopas[i]->TakeDamage();
+		score += 10;
+		UpdateScoreText(score);
 	}
 	for (unsigned int i = 0; i < mCoins.size(); i++)
 	{
 		mCoins[i]->CollectCoin();
+		score += 800;
+		UpdateScoreText(score);
 	}
+}
+
+void GameScreenLevel1::UpdateScoreText(int score)
+{
+	string scoreString;
+	ostringstream convert;
+
+	convert << score;
+	scoreString = convert.str();
+
+	scoreNum->Setup(mRenderer, (scoreRect.x + scoreRect.w + 3), 0, scoreString.c_str(), marioFont, { 255, 255, 255, 0 }, &scoreNumTexture, &scoreNumRect, scoreNumSurface);
 }
 
 GameScreenLevel1::~GameScreenLevel1()

@@ -19,10 +19,8 @@ Text::~Text()
 
 }
 
-void Text::Setup(SDL_Renderer* renderer, int x, int y, const char* text, TTF_Font* font, SDL_Color textColor, SDL_Texture** texture, SDL_Rect *rect)
+void Text::Setup(SDL_Renderer* renderer, int x, int y, const char* text, TTF_Font* font, SDL_Color textColor, SDL_Texture** texture, SDL_Rect *rect, SDL_Surface* surface)
 {
-	SDL_Surface* surface;
-
 	//Create surface
 	if (!(surface = TTF_RenderText_Solid(font, text, textColor)))
 	{

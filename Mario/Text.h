@@ -19,7 +19,7 @@ public:
 	void Render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* rect);
 
 	//custom functions
-	void Setup(SDL_Renderer* renderer, int x, int y, const char* text, TTF_Font* font, SDL_Color textColor, SDL_Texture** texture, SDL_Rect* rect);
+	void Setup(SDL_Renderer* renderer, int x, int y, const char* text, TTF_Font* font, SDL_Color textColor, SDL_Texture** texture, SDL_Rect* rect, SDL_Surface* surface);
 	float GetWidth();
 	float GetHeight();
 

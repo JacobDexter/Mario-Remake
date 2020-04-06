@@ -44,7 +44,7 @@ private:
 	LevelMap* mLevelMap;
 	PowBlock* mPowBlock;
 
-	//functions
+	//Level Setup
 	bool SetUpLevel();
 	void SetLevelMap();
 
@@ -60,6 +60,7 @@ private:
 	SoundEffect* sKoopaSpawn;
 	SoundEffect* sGameOver;
 	SoundEffect* sPlayerDeath;
+	SoundEffect* sKoopaKick;
 
 	//Koopas
 	vector<CharacterKoopa*> mKoopas;
@@ -74,11 +75,15 @@ private:
 	TTF_Font* marioFont;
 	SDL_Texture* scoreTexture;
 	SDL_Rect scoreRect;
+	SDL_Surface* scoreSurface;
 
 	//SCORE NUMBER
 	Text* scoreNum;
 	SDL_Texture* scoreNumTexture;
 	SDL_Rect scoreNumRect;
+	SDL_Surface* scoreNumSurface;
+	int score;
+	void UpdateScoreText(int score);
 
 	bool gameOver;
 };
