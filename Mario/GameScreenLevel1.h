@@ -14,6 +14,7 @@
 #include "Text.h"
 #include "GameScreenManager.h"
 #include "Music.h"
+#include <fstream>
 
 class Texture2D;
 class PowBlock;
@@ -31,10 +32,12 @@ public:
 	//Updates
 	void UpdatePOWBlock();
 	void UpdateEnemies(float deltaTime, SDL_Event e);
+	bool InsertScoreIntoLeaderboard(int score, string path);
 
 	//Enemies
 	void CreateKoopa(Vector2D position, FACING direction, float speed);
 	void CreateCoin(Vector2D position, FACING direction, float speed);
+	void SpawnRandomEnemy(Vector2D position, FACING direction);
 
 private:
 	//variables
@@ -64,7 +67,7 @@ private:
 
 	//Koopas
 	vector<CharacterKoopa*> mKoopas;
-	float koopaRespawnTimer = KOOPA_RESPAWN_TIME;
+	float enemyRespawnTimer = ENEMY_RESPAWN_TIME;
 
 	//Coins
 	vector<CharacterCoin*> mCoins;
@@ -82,7 +85,6 @@ private:
 	SDL_Texture* scoreNumTexture;
 	SDL_Rect scoreNumRect;
 	SDL_Surface* scoreNumSurface;
-	int score;
 	void UpdateScoreText(int score);
 
 	bool gameOver;

@@ -23,11 +23,13 @@ void PowBlock::Render()
 {
 	if (mNumberOfHitsLeft > 0)
 	{
+		//Sets portion of spritesheet to render
 		int left = mSingleSpriteWidth * (mNumberOfHitsLeft - 1);
 
 		SDL_Rect portionOfSpriteSheet = { left, 0, mSingleSpriteWidth, mSingleSpriteHeight };
 		SDL_Rect destRect = { (int)(mPosition.x), (int)(mPosition.y), mSingleSpriteWidth, mSingleSpriteHeight };
 
+		//Draw Texture
 		mTexture->Render(portionOfSpriteSheet, destRect, SDL_FLIP_NONE);
 	}
 }

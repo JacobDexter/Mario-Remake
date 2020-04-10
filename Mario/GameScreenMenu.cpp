@@ -24,6 +24,10 @@ bool GameScreenMenu::SetUpLevel()
 	menuText = new Text();
 	menuFont = TTF_OpenFont("Fonts/emulogic.ttf", 18);
 
+	//music setup
+	gBackgroundMusic = new Music();
+	gBackgroundMusic->LoadMusic("Music/Menu.ogg");
+
 	if (menuFont == NULL)
 	{
 		cout << "Error opening font: " << SDL_GetError() << endl;
@@ -51,6 +55,7 @@ void GameScreenMenu::Update(float deltaTime, SDL_Event e)
 	{
 	case SDL_MOUSEBUTTONDOWN:
 		//change screens
+		gBackgroundMusic->Stop();
 		gameScreenManager->ChangeScreen(SCREEN_LEVEL1);
 	break;
 	}

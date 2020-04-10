@@ -189,4 +189,12 @@
     </Library>
     <Library Include="SDL\SDL2_ttf.lib" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Maps\Level1.txt">
+      <Filter>Source Files\Levels</Filter>
+    </Text>
+    <Text Include="Leaderboard.txt">
+      <Filter>Source Files\Levels</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

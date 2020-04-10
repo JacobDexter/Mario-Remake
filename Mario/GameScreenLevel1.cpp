@@ -6,10 +6,13 @@
 #include "Texture2D.h"
 #include "PowBlock.h"
 #include "Collisions.h"
+#include <vector>
 
 using namespace std;
 
 extern GameScreenManager* gameScreenManager;
+
+int score;
 
 GameScreenLevel1::GameScreenLevel1(SDL_Renderer* renderer) : GameScreen(renderer)
 {
@@ -47,8 +50,8 @@ bool GameScreenLevel1::SetUpLevel()
 	scoreNum->Setup(mRenderer, (scoreRect.x + scoreRect.w + 3), 0, "0", marioFont, { 255, 255, 255, 0 }, &scoreNumTexture, &scoreNumRect, scoreNumSurface);
 
 	//Players setup
-	gCharacterMario = new CharacterMario(mRenderer, "Images/Mario.png", Vector2D(64, 330), mLevelMap);
-	gCharacterLuigi = new CharacterLuigi(mRenderer, "Images/Luigi.png", Vector2D(64, 330), mLevelMap);
+	gCharacterMario = new CharacterMario(mRenderer, "Images/Mario.png", Vector2D(410, 330), mLevelMap);
+	gCharacterLuigi = new CharacterLuigi(mRenderer, "Images/Luigi.png", Vector2D(70, 330), mLevelMap);
 
 	//Pow Block setup
 	mPowBlock = new PowBlock(mRenderer, mLevelMap);
@@ -69,8 +72,6 @@ bool GameScreenLevel1::SetUpLevel()
 	//Spawn initial enemies
 	CreateKoopa(Vector2D(10, 32), FACING_RIGHT, KOOPA_SPEED);
 	CreateKoopa(Vector2D(470, 32), FACING_LEFT, KOOPA_SPEED);
-	CreateCoin(Vector2D(370, 32), FACING_LEFT, KOOPA_SPEED);
-	CreateCoin(Vector2D(170, 32), FACING_RIGHT, KOOPA_SPEED);
 
 	return true;
 }
@@ -166,14 +167,14 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 		gCharacterLuigi->CheckViewportCollision();
 		gCharacterMario->CheckViewportCollision();
 
-		koopaRespawnTimer -= deltaTime;
+		enemyRespawnTimer -= deltaTime;
 
 		//Timer to respawn Koopas
-		if (koopaRespawnTimer <= 0.0f)
+		if (enemyRespawnTimer <= 0.0f)
 		{
-			CreateKoopa(Vector2D(10, 32), FACING_RIGHT, KOOPA_SPEED);
-			CreateKoopa(Vector2D(470, 32), FACING_LEFT, KOOPA_SPEED);
-			koopaRespawnTimer = KOOPA_RESPAWN_TIME;
+			SpawnRandomEnemy(Vector2D(10, 32), FACING_RIGHT);
+			SpawnRandomEnemy(Vector2D(470, 32), FACING_LEFT);
+			enemyRespawnTimer = ENEMY_RESPAWN_TIME;
 		}
 
 		//Update Enemies and Blocks
@@ -185,6 +186,7 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 		if (Mix_Playing(1) != 1)
 		{
 			//Display Game Over
+			InsertScoreIntoLeaderboard(score, "Leaderboard.txt");
 			gameScreenManager->ChangeScreen(SCREEN_GAMEOVER);
 		}
 	}
@@ -332,8 +334,8 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 				if (Collisions::Instance()->Circle(mCoins[i], gCharacterMario))
 				{
 					mCoins[i]->CollectCoin();
-					UpdateScoreText(score);
 					score += 800;
+					UpdateScoreText(score);
 				}
 				if (Collisions::Instance()->Circle(mCoins[i], gCharacterLuigi))
 				{
@@ -420,6 +422,74 @@ void GameScreenLevel1::UpdateScoreText(int score)
 	scoreString = convert.str();
 
 	scoreNum->Setup(mRenderer, (scoreRect.x + scoreRect.w + 3), 0, scoreString.c_str(), marioFont, { 255, 255, 255, 0 }, &scoreNumTexture, &scoreNumRect, scoreNumSurface);
+}
+
+void GameScreenLevel1::SpawnRandomEnemy(Vector2D position, FACING direction)
+{
+	float randomSpawn = (rand() % 10) + 1; //pick random number from 1 to 10
+
+	if (randomSpawn <= 7)
+	{
+		CreateKoopa(Vector2D(position), direction, KOOPA_SPEED);
+	}
+	else
+	{
+		CreateCoin(Vector2D(position), direction, COIN_SPEED);
+	}
+}
+
+bool GameScreenLevel1::InsertScoreIntoLeaderboard(int score, string path)
+{
+	ifstream inFile;
+	ofstream outFile;
+	vector<int> scores;
+
+	//Read file and save into vector
+	inFile.open(path);
+
+	if (!inFile.good())
+	{
+		cerr << "Can't open scoreboard file." << endl;
+		return false;
+	}
+
+	for (int x = 0; x < 10; x++)
+	{
+		//read first 10 scores from file
+		int temp;
+		inFile >> temp;
+		scores.insert(scores.begin() + x, temp);
+	}
+
+	inFile.close();
+
+	//Insert new score if it is greater than the first 10
+	for (int x = 0; x < scores.size(); x++)
+	{
+		if (score > scores[x])
+		{
+			scores.insert(scores.begin() + x, score);
+			break;
+		}
+	}
+
+	//Write new leaderboard to file
+	outFile.open(path, ios::out | ios::trunc);
+
+	if (!outFile.good())
+	{
+		cerr << "Can't open scoreboard file." << endl;
+		return false;
+	}
+
+	for (int x = 0; x < scores.size(); x++)
+	{
+		outFile << scores[x] << endl; //Export Scores into file
+	}
+
+	outFile.close();
+
+	return true;
 }
 
 GameScreenLevel1::~GameScreenLevel1()

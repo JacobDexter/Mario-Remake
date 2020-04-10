@@ -7,6 +7,7 @@
 #include "Texture2D.h"
 #include "GameScreenManager.h"
 #include "Mario.h"
+#include "Music.h"
 
 class Texture2D;
 class GameScreen;
@@ -32,4 +33,7 @@ private:
 	SDL_Texture* menuTexture;
 	SDL_Rect menuRect;
 	SDL_Surface* menuSurface;
+
+	//music
+	Music* gBackgroundMusic;
 };

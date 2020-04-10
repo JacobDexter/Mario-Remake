@@ -5,7 +5,7 @@ using namespace std;
 
 CharacterLuigi::CharacterLuigi(SDL_Renderer* renderer, string imagePath, Vector2D startPosition, LevelMap* map) : CharacterPlayer(renderer, imagePath, startPosition, map)
 {
-
+	mFacingDirection = FACING_RIGHT;
 }
 
 void CharacterLuigi::Update(float deltaTime, SDL_Event e)

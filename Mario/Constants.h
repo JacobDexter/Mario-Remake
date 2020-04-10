@@ -26,4 +26,5 @@ const float INITIAL_JUMP_FORCE = 400.0f;
 
 //ENEMIES
 const float KOOPA_SPEED = 40.0f;
-const float KOOPA_RESPAWN_TIME = 7.0f;
+const float COIN_SPEED = 40.0f;
+const float ENEMY_RESPAWN_TIME = 5.0f;

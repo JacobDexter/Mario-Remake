@@ -1,2 +1,5 @@
 ﻿  GameScreenLevel1.cpp
+G:\Semester 2\Mario\Mario\GameScreenLevel1.cpp(429,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+G:\Semester 2\Mario\Mario\GameScreenLevel1.cpp(467,20): warning C4018: '<': signed/unsigned mismatch
+G:\Semester 2\Mario\Mario\GameScreenLevel1.cpp(485,20): warning C4018: '<': signed/unsigned mismatch
   Mario.vcxproj -> G:\Semester 2\Mario\Debug\Mario.exe
